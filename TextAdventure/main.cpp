@@ -1,5 +1,7 @@
 #include "headers.hpp"
 #include "functionality.hpp"
+#include <stdio.h>
+#include <cstring>
 
 void testGameObject();
 void testStats();
@@ -10,10 +12,23 @@ using std::endl;
 using std::cin;
 
 int main() {
-	testGameObject();
+	/*testGameObject();
 	testStats();
-	testItem();
+	testItem();*/
 
+	char* context = NULL;
+	char* blah = "pickup long sword";	// This is non-modifiable and will not work as the source in strtok_s
+	int inputLength = strlen(blah) + 1;
+	char* sampleInput = new char[inputLength];	// Create a modifiable c-str based off of the const char*
+	strcpy_s(sampleInput, inputLength, blah);
+	char tokens[] = " ";	// Tokens to split the c-str on
+
+	cout << "Sample input: " << sampleInput << "\n";
+	char* command = strtok_s(sampleInput, tokens, &context);	// Modifies sampleInput to 'pickup'
+	cout << "Parsed command: " << command << "\n";
+	delete[] sampleInput;	// Don't forget to cleanup
+
+	cin.get();
 	return 0;
 }
 
