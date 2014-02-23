@@ -1,11 +1,12 @@
-#include "headers.hpp"
-#include "functionality.hpp"
 #include <stdio.h>
 #include <cstring>
+#include <sstream>
+#include "headers.hpp"
 
 void testGameObject();
 void testStats();
 void testItem();
+void testController();
 
 using std::cout;
 using std::endl;
@@ -14,19 +15,10 @@ using std::cin;
 int main() {
 	/*testGameObject();
 	testStats();
-	testItem();*/
+	testItem();
+	testController();*/
 
-	char* context = NULL;
-	char* blah = "pickup long sword";	// This is non-modifiable and will not work as the source in strtok_s
-	int inputLength = strlen(blah) + 1;
-	char* sampleInput = new char[inputLength];	// Create a modifiable c-str based off of the const char*
-	strcpy_s(sampleInput, inputLength, blah);
-	char tokens[] = " ";	// Tokens to split the c-str on
-
-	cout << "Sample input: " << sampleInput << "\n";
-	char* command = strtok_s(sampleInput, tokens, &context);	// Modifies sampleInput to 'pickup'
-	cout << "Parsed command: " << command << "\n";
-	delete[] sampleInput;	// Don't forget to cleanup
+	testController();
 
 	cin.get();
 	return 0;
@@ -87,8 +79,8 @@ void testStats() {
 
 void testItem() {
 	Item i;
-	i.setFunctionality(&functionality::test);
-
+	i.setAction(&itemActions::test);
+	
 	GameObject g;
 	g.setName("John");
 	g.setDescription("GDD Student");
@@ -99,4 +91,18 @@ void testItem() {
 	cout << "g:\n" << g.name() << "\n" << g.description() << "\n\n";
 
 	cin.get();
+}
+
+
+void testController() {
+	GameObject g;
+	g.setName("John");
+	g.setDescription("A boring individual.");
+
+	Controller c;
+	c.setTarget(&g);
+	c.addAction("setdescription", controllerActions::setDescription);
+	c.addAction("print", controllerActions::print);
+
+	while (c.prompt() != "quit"){}
 }

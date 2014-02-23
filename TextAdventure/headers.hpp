@@ -4,6 +4,8 @@
 #include <iostream>
 
 #include "types.hpp"
+#include "itemActions.hpp"
+#include "controllerActions.hpp"
 
 #include "GameObject.hpp"
 #include "Stats.hpp"
@@ -13,5 +15,6 @@
 #include "LimitedUseEquipItem.hpp"
 #include "Character.hpp"
 #include "Room.hpp"
+#include "Controller.hpp"
 
 #endif

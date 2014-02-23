@@ -1,27 +1,27 @@
 #include "Item.hpp"
 
 // Getters and setters
-Item::Functionality Item::functionality() const {
-	return this->_functionality;
+Item::Action Item::action() const {
+	return this->_action;
 }
 
 
-void Item::setFunctionality(Item::Functionality newVal) {
-	this->_functionality = newVal;
+void Item::setAction(Item::Action newVal) {
+	this->_action = newVal;
 }
 
 
 // Constructors, deconstructor, and operators
 Item::Item(void) :
 GameObject(),
-_functionality(nullptr) {
+_action(nullptr) {
 	GameObject::GameObject();
 }
 
 
 Item::Item(const Item& other) :
 GameObject(other) {
-	this->_functionality = other._functionality;
+	this->_action = other._action;
 }
 
 
@@ -31,12 +31,12 @@ Item::~Item(void) {
 
 Item& Item::operator=(const Item& rhs) {
 	GameObject::operator=(rhs);
-	this->_functionality = rhs._functionality;
+	this->_action = rhs._action;
 
 	return *this;
 }
 
 
 void Item::operator()(GameObject& target) {
-	this->_functionality(target);
+	this->_action(target);
 }

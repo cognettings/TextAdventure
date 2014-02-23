@@ -10,16 +10,16 @@ private:	// Properties
 	char* _description;
 public:		// Getters and setters
 	const char* name() const;
-	void setName(char* newVal);
+	void setName(const char* newVal);
 	const char* description() const;
-	void setDescription(char* newVal);
+	void setDescription(const char* newVal);
 public:		// Constructors, deconstructor, and operators
 	GameObject(void);
 	GameObject(const GameObject& other);
 	virtual ~GameObject(void);
 	GameObject& operator=(const GameObject& rhs);
 private:	// Methods
-	void _setCStr(char** destination, char* source);
+	void _setCStr(char** destination, const char* source);
 };
 
 #endif

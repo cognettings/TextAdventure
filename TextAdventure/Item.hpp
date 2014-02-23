@@ -5,12 +5,12 @@
 
 class Item :
 public GameObject {
-typedef void (*Functionality)(GameObject&);
+typedef void (*Action)(GameObject&);
 private:	// Properties
-	Functionality _functionality;
+	Action _action;
 public:		// Getters and setters
-	Functionality functionality() const;
-	void setFunctionality(Functionality newVal);
+	Action action() const;
+	void setAction(Action newVal);
 public:
 	Item(void);
 	Item(const Item& other);

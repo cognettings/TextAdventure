@@ -6,7 +6,7 @@ const char* GameObject::name() const {
 }
 
 
-void GameObject::setName(char* newVal) {
+void GameObject::setName(const char* newVal) {
 	_setCStr(&this->_name, newVal);
 }
 
@@ -16,7 +16,7 @@ const char* GameObject::description() const {
 }
 
 
-void GameObject::setDescription(char* newVal) {
+void GameObject::setDescription(const char* newVal) {
 	_setCStr(&this->_description, newVal);
 }
 
@@ -54,7 +54,7 @@ GameObject& GameObject::operator=(const GameObject& rhs) {
 
 
 // Methods
-void GameObject::_setCStr(char** destination, char* source) {
+void GameObject::_setCStr(char** destination, const char* source) {
 	uint sLen = strlen(source) + 1;		// Length of source including null-terminator
 
 	// If destination has been allocated
