@@ -7,6 +7,8 @@ void testGameObject();
 void testStats();
 void testItem();
 void testController();
+void testCharacter();
+void gameLoop();
 
 using std::cout;
 using std::endl;
@@ -16,10 +18,12 @@ int main() {
 	/*testGameObject();
 	testStats();
 	testItem();
-	testController();*/
-
 	testController();
+	testCharacter();*/
 
+	gameLoop();
+
+	cout << "Press enter to close.\n";
 	cin.get();
 	return 0;
 }
@@ -105,4 +109,54 @@ void testController() {
 	c.addAction("print", controllerActions::print);
 
 	while (c.prompt() != "quit"){}
+}
+
+void testCharacter() {
+	Character c;
+	c.setName("John");
+}
+
+void gameLoop() {
+	// Set up the rooms
+	Room up;
+	up.setName("The North Pole");
+	up.setDescription("The northern-most reaches of the land. It's very chilly up here");
+	Room down;
+	down.setName("The Deep South");
+	down.setDescription("The southern peaks are very chilly.");
+	Room left;
+	left.setName("The Democracy");
+	left.setDescription("Ugh, politics...");
+	Room right;
+	left.setName("The Republic");
+	right.setDescription("Ugh, politics...");
+	Room center;
+	center.setName("Beginner's Palace");
+	center.setDescription("A great place for the newbs.");
+	center.setUp(&up);
+	center.setDown(&down);
+	center.setLeft(&left);
+	center.setRight(&right);
+
+	// Set up the character
+	Character character;
+	character.setName("Adventurer");
+	character.setDescription("The soon-to-be savior of the world.");
+	character.setRoom(&center);
+
+	// Set up the controller
+	Controller controller;
+	controller.setTarget(&character);
+	controller.addAction("up", controllerActions::up);
+	controller.addAction("down", controllerActions::down);
+	controller.addAction("left", controllerActions::left);
+	controller.addAction("right", controllerActions::right);
+	controller.addAction("help", controllerActions::help);
+	controller.addAction("look", controllerActions::look);
+
+
+	// Game loop
+	cout << "Welcome! Type help for commands.\n\n";
+	while (controller.prompt() != "quit"){}
+	cout << "\nThe adventure has ended.\n";
 }

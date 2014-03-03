@@ -6,12 +6,18 @@
 class Item :
 public GameObject {
 typedef void (*Action)(GameObject&);
+
+
 private:	// Properties
 	Action _action;
+
+
 public:		// Getters and setters
 	Action action() const;
 	void setAction(Action newVal);
-public:
+
+
+public:		// Constructor, deconstructor, and operators
 	Item(void);
 	Item(const Item& other);
 	virtual ~Item(void);

@@ -1,4 +1,5 @@
 #include <iostream>
+#include "headers.hpp"
 #include "controllerActions.hpp"
 
 // Debugging
@@ -15,22 +16,54 @@ void controllerActions::print(GameObject& target, const char* arg) {
 
 // Movement
 void controllerActions::up(GameObject& target, const char* arg) {
+	Character* character = dynamic_cast<Character*>(&target);
+	Room* room = character->room()->up();
 
+	if (room) {
+		character->setRoom(room);
+	}
+	else {
+		std::cout << "You can not go that way.\n";
+	}
 }
 
 
 void controllerActions::down(GameObject& target, const char* arg) {
+	Character* character = dynamic_cast<Character*>(&target);
+	Room* room = character->room()->down();
 
+	if (room) {
+		character->setRoom(room);
+	}
+	else {
+		std::cout << "You can not go that way.\n";
+	}
 }
 
 
 void controllerActions::left(GameObject& target, const char* arg) {
+	Character* character = dynamic_cast<Character*>(&target);
+	Room* room = character->room()->left();
 
+	if (room) {
+		character->setRoom(room);
+	}
+	else {
+		std::cout << "You can not go that way.\n";
+	}
 }
 
 
 void controllerActions::right(GameObject& target, const char* arg) {
+	Character* character = dynamic_cast<Character*>(&target);
+	Room* room = character->room()->right();
 
+	if (room) {
+		character->setRoom(room);
+	}
+	else {
+		std::cout << "You can not go that way.\n";
+	}
 }
 
 
@@ -72,10 +105,16 @@ void controllerActions::inspect(GameObject& target, const char* arg) {
 
 
 void controllerActions::help(GameObject& target, const char* arg) {
-
+	std::cout << "Available actions:\n"
+			  << "\tMovement: up, down, left, right\n"
+			  << "\tInfo: help, look\n";
 }
 
 
 void controllerActions::look(GameObject& target, const char* arg) {
+	Character* character = dynamic_cast<Character*>(&target);
+	Room* room = character->room();
 
+	std::cout << "Room name: " << room->name() << "\n"
+			  << "Description: " << room->description() << "\n";
 }
