@@ -1,4 +1,5 @@
 #include "Character.hpp"
+#include "EquipItem.hpp"
 
 // Getters and setters
 const Character::ItemMap& Character::inventory() const {
@@ -31,7 +32,7 @@ void Character::setBaseStats(const Stats& newVal) {
 }
 
 
-const Room* Character::room() const {
+Room* Character::room() const {
 	return this->_room;
 }
 
@@ -67,3 +68,48 @@ Character& Character::operator=(const Character& rhs) {
 
 	return *this;
 }
+
+// Methods
+void Character::addItem(const Item& toAdd) {
+	Item* newItem = new Item;
+	*newItem = toAdd;
+
+	this->_inventory.insert(ItemMapType(newItem->name(), newItem));
+}
+
+
+void Character::removeItem(const char* itemName) {
+	Item itemCopy;
+	ItemMapIter pos = this->_inventory.find(itemName);
+
+	// If the specified item exists in this Room, then remove and return it
+	if (pos != this->_inventory.end()) {
+		itemCopy = *(pos->second);
+		this->_inventory.erase(pos);
+	}
+	else {
+		throw (std::out_of_range("I don't see the \"" + std::string(itemName) + "\" in your inventory."));
+	}
+}
+
+
+void Character::equipItem(const char* itemName) {
+	//EquipItem* item = new 
+	//ItemMapIter pos = this->_inventory.find(itemName);
+
+	//// If this Character has the specified item, then equip it
+	//if (pos != this->_inventory.end()) {
+
+	//}
+}
+
+
+void Character::unequipItem(const char* itemName) {
+
+}
+
+
+void Character::dropItem(const char* itemName) {
+
+}
+
